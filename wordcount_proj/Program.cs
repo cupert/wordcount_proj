@@ -6,16 +6,23 @@
         {
             words word = new words();
             List<string> test = word.getallWords();
-
+            List<listpack> listpacks = new List<listpack>();
             test = word.cleanupWords(test);
 
-
-            //check words:
-
-            for (int i = 0; i < test.Count; i++)
+            foreach(string singleword in test)
             {
-                Console.WriteLine($"Count: {i} value: {test[i]}");
+                listpacks.Add(new listpack(singleword));
             }
+
+            //var query = from singlepack in listpacks
+            //group singlepack by singlepack into e
+            //select new(data = e.Key, count = e.Count());
+            foreach (var g in test
+                    .GroupBy(x => x, StringComparer.CurrentCultureIgnoreCase))
+            {
+                Console.WriteLine("{0}: {1}", g.Key, g.Count());
+            }
+
         }
     }
-}
+}  
